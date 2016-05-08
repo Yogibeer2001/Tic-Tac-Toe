@@ -1,2 +1,0 @@
-git remote add origin https://github.com/Yogibeer2001/Tic-Tac-Toe.git
-git push -u origin master
