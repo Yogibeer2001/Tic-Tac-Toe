@@ -60,6 +60,13 @@ button
 h1
 {
   font-size: 50px;
+  right: 0;
   font-weight: bold;
   text-align: center;
+}
+#board{
+    font-size: 30px;
+    font-family: helvetica;
+    color: whitesmoke;
+    margin-top: 10px;
 }
