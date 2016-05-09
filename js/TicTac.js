@@ -1,7 +1,9 @@
 $(function(){
 
-var playerOne = 'X';
-var playerTwo = '0';
+// var playerOne = 'x';
+// var playerTwo = '0';
+var playerOne = '<img src="images/Clinton.jpg"/>';
+var playerTwo = '<img src="images/Bernie.jpg"/>';
 var reloadButton = $('#reload');
 var currentPlayer;
 var turn = 0;
@@ -9,7 +11,9 @@ var winner = 0;
 var grid =  [[0,0,0],[0,0,0],[0,0,0]];
 var row = $(this).parent().index();
 var column = $(this).index();
-
+var win;
+var maxHeight = 100;
+var maxWidth = 100;
 
 
 reloadButton.on('click',function(event)
@@ -21,7 +25,6 @@ function boardMsg(x)
     {
       return $("#board").text(x);
     }
-
 function start()
 {
             turn = "";
@@ -38,29 +41,34 @@ function start()
 
 
 
-
 $('.column').on('click', function()
 {
   var row = $(this).parent().index();
   var column = $(this).index();
-    function checkWinner ()
-    {
-        // console.log('indexOf 0:' + grid[1].indexOf(0));
-        // console.log('indexOf 1:' + grid[1].indexOf(1));
-        // console.log('indexOf 2:' + grid[1].indexOf(2));
-      if(grid[row].indexOf(1) !== -1 && grid[row].indexOf(0) == -1)
-        {
-          winner = 'Player 1';
-          console.log('Player 1 wins');
+  function checkWinner(n,playerName){
+      if(
 
-        }
-      if(grid[row].indexOf(2) !== -1 && grid[row].indexOf(0) === -1)
-        {
-          winner = 'Player 2'
-          console.log('Player 2 wins');
-        }
-      return winner;
-    }
+          (grid[0][0]==n && grid[0][1]==n && grid[0][2]==n) ||
+          (grid[1][0]==n && grid[1][1]==n && grid[1][2]==n) ||
+          (grid[2][0]==n && grid[2][1]==n && grid[2][2]==n) ||
+
+          (grid[0][0]==n && grid[1][0]==n && grid[2][0]==n) ||
+          (grid[0][1]==n && grid[1][1]==n && grid[2][1]==n) ||
+          (grid[0][2]==n && grid[1][2]==n && grid[2][2]==n) ||
+
+          (grid[0][0]==n && grid[1][1]==n && grid[2][2]==n)||
+          (grid[0][2]==n && grid[1][1]==n && grid[2][0]==n)
+
+
+          ){
+          boardMsg(playerName + " won the game!").css('color', 'red');
+          winner = 1;
+          turn=0;
+          // $("#playButton").text("Play again");
+          return true;
+      }
+      return false;
+  }
 
     if(grid[row][column] !==0)
       {
@@ -71,10 +79,7 @@ $('.column').on('click', function()
     {
       currentPlayer = playerOne;
       grid[row][column] = 1;
-      for (var i = 0; i < grid.length; i++) {
-        console.log(grid[i][column]);
-      }
-      checkWinner();
+      win = checkWinner(1,'Player 1');
 
 
 
@@ -87,13 +92,7 @@ $('.column').on('click', function()
     {
       currentPlayer = playerTwo;
       grid[row][column] = 2;
-      for (var i = 0; i < grid.length; i++) {
-        console.log(grid[i][column]);
-      }
-      checkWinner();
-      // for (var i = 0; i < grid.length; i++) {
-      //   console.log(grid[i][column]);
-      // }
+      win = checkWinner(2,'Player 2');
 
 
       if(winner !== 0)
@@ -102,7 +101,8 @@ $('.column').on('click', function()
         }
     }
   turn++;
-  $(this).append(currentPlayer)
+
+    $(this).append(currentPlayer);
 
       if(turn === 9)
       {
@@ -111,11 +111,6 @@ $('.column').on('click', function()
 
 });
 
-
-
-// for (var i = 0; i < grid.length; i++) {
-//   console.log(grid[i][column]);
-// }
 
 
 
