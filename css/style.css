@@ -1,0 +1,65 @@
+body, html
+{
+  margin: 0;
+  padding: 0;
+}
+body
+{
+  background-color: blue;
+  background-image: url(../images/WhiteHouse.jpg);
+  background-size: cover;
+  image-resolution: from-image;
+  max-width: 100%;
+}
+button
+{
+  color: yellow;
+  font-weight: bold;
+  font-size: 25px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100px;
+  width: 250px;
+  background-image: url(../images/flag.jpg);
+  background-size: cover;
+  display: inline-block;
+}
+#gameField
+{
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+}
+
+.row
+{
+  display: flex;
+  width: 300px;
+  height: 100px;
+}
+
+.column
+{
+  width: 100px;
+  height: 100px;
+  border-style:solid;
+  border-color: black;
+  transition: all .2s ease-in-out;
+}
+
+.column:hover
+{
+  background-image: url(../images/flag.jpg);
+
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.25);
+}
+
+h1
+{
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+}
