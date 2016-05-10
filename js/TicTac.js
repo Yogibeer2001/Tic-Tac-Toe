@@ -1,9 +1,11 @@
-$(function(){
+// $(function(){
 
-// var playerOne = 'x';
-// var playerTwo = '0';
-var playerOne = '<img src="images/Clinton.jpg"/>';
-var playerTwo = '<img src="images/Bernie.jpg"/>';
+
+var avatar = $('.avatars img');
+var avatarOne = $('.avatars #avatarOne');
+var avatarTwo = $('.avatars #avatarTwo');
+var playerOne = '';
+var playerTwo = '';
 var reloadButton = $('#reload');
 var startButton = $('#newGame');
 var scoreBoardOne = $('.scoreBoard>#playerOne');
@@ -19,6 +21,32 @@ var maxHeight = 100;
 var maxWidth = 100;
 var playerOneScore = 0;
 var playerTwoScore = 0;
+
+
+avatar.on('click', function()
+        {
+          if(playerOne === '')
+            {
+              playerOne = this;
+              avatarOne.append(playerOne).css('display', 'flex');
+              console.log(playerOne);
+            }
+          else if (playerTwo === '')
+          {
+            playerTwo = this;
+            avatarTwo.append(playerTwo).css('display', 'flex');
+            console.log(playerTwo);
+          }
+          
+          else
+          {
+            $('.menu').css('display', 'none');
+            $('.game').css('display', 'block');
+          }
+        });
+
+// $('.menu').hide()
+// $('.game').show()
 
 
 reloadButton.on('click',function(event)
@@ -147,4 +175,18 @@ if (turn%2 === 0)
 
 
 
-});
+// });
+
+// * Use timers to display "waiting..." messages while users are waiting to be matched
+// * Allow game customizable options, time limits, board size, game rounds, name & profiles etc
+// * Allow players to customize their token (X, O, name, picture, avatar etc)
+// * Get inventive with your styling ** use CSS effects or animations to spiff things up
+// * Use **LocalStorage** or **SessionStorage** to persist data locally to allow games to continue after page refresh or loss of internet connectivity
+// * Be creative with the game, bend the rules, give it a twist
+// ​
+// ### EXTRA Bonus
+// ​
+// * Connect to a prebuilt backend service for persistence (research **firebase** and try some of their examples)
+// ​
+// ___________________________________________________________________________________
+// ​

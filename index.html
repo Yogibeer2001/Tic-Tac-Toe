@@ -2,41 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <script   src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-  <script type="text/javascript" src="js/TicTac.js"></script>
   <link rel="stylesheet" href="css/style.css">
   <title>Tic Tac Toe</title>
 </head>
 <body>
-<h1>Who got to rule the world?</h1>
-<div class="gameArea">
-  <div class="buttons">
-      <button id="reload" type="button" name="reloadButton">Reload the bloody Page</button>
-      <button id="newGame" type="button" name="startButton">Start a new Round</button>
+  <div class="menu">
+    <h1>Choose your Avatar</h1>
+        <div class="avatars">
+          <img id='clinton' src="images/Clinton.jpg"/>
+          <img id='bernie'src="images/Bernie.jpg"/>
+          <img id='trump'src="images/trump.jpg"/>
+          <img id='cruz'src="images/cruz.jpg"/>
+          <img id='santorum'src="images/santorum.jpg"/>
+          <img id='marley'src="images/Marley.jpg"/>
+          <img id='vader'src="images/vader.jpeg"/>
+        <div id="avatarOne">
+          <h2 >Player One :</h2>
+        </div>
+        <div id="avatarTwo">
+          <h2>Player Two :</h2>
+        </div>
+        </div>
   </div>
-  <div id="gameField">
-      <div class="row">
-        <div class="column"></div>
-        <div class="column"></div>
-        <div class="column"></div>
+<div class="game">
+    <h1>Who got to rule the world?</h1>
+    <div class="gameArea">
+          <div class="buttons">
+              <button id="reload" type="button" name="reloadButton">Reload the bloody Page</button>
+              <button id="newGame" type="button" name="startButton">Start a new Round</button>
+          </div>
+
+          <div id="gameField">
+                <div class="row">
+                  <div class="column"></div>
+                  <div class="column"></div>
+                  <div class="column"></div>
+                </div>
+                <div class="row">
+                  <div class="column"></div>
+                  <div class="column"></div>
+                  <div class="column"></div>
+                </div>
+                <div class="row">
+                  <div class="column"></div>
+                  <div class="column"></div>
+                  <div class="column"></div>
+                </div>
+          </div>
+      <div class="scoreBoard">
+            <ul id='playerOne'>Hilary : 0</ul>
+            <ul id='playerTwo'>Bernie : 0</ul>
       </div>
-      <div class="row">
-        <div class="column"></div>
-        <div class="column"></div>
-        <div class="column"></div>
-      </div>
-      <div class="row">
-        <div class="column"></div>
-        <div class="column"></div>
-        <div class="column"></div>
-      </div>
-  </div>
-  <div class="scoreBoard">
-    <ul id='playerOne'>Hilary : 0</ul>
-    <ul id='playerTwo'>Bernie : 0</ul>
-  </div>
-      <h1 id="board"></h1>
+          <h1 id="board"></h1>
+    </div>
 </div>
+
+<script   src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="js/TicTac.js"></script>
 
 </body>
 </html>

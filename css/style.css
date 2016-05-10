@@ -12,7 +12,23 @@ body
   bottom : 0;
   /*max-width: 100%;*/
 }
+.menu
+{
+  display: inline-block;
+}
+.avatars img
+{
+    height: 100px;
+    width: 100px;
+    display: inline-block;;
+    margin : 0;
+    padding: 0;
+}
 
+.game
+{
+  display: none;
+}
 .gameArea
 {
   width: 98%;
@@ -117,6 +133,12 @@ h1
   font-size: 50px;
   right: 0;
   font-weight: bold;
+  text-align: center;
+}
+h2
+{
+  font-size: 50px;
+  display: block;
   text-align: center;
 }
 #board{
