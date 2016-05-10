@@ -6,6 +6,8 @@ var playerOne = '<img src="images/Clinton.jpg"/>';
 var playerTwo = '<img src="images/Bernie.jpg"/>';
 var reloadButton = $('#reload');
 var startButton = $('#newGame');
+var scoreBoardOne = $('.scoreBoard>#playerOne');
+var scoreBoardTwo = $('.scoreBoard>#playerTwo');
 var currentPlayer;
 var turn = 0;
 var winner = 0;
@@ -82,7 +84,7 @@ $('.column').on('click', function()
 
 if(grid[row][column] !==0)
       {
-          console.log("This position is taken. Please try other position.");
+          alert("This position is taken. Please try other position.");
           return;
       }
 
@@ -94,9 +96,16 @@ if (turn%2 === 0)
       if(winner !== 0)
         {
           $('#gameField').css('display', 'none');
-          boardMsg("Peace by more firepower").css('color', 'red');
+          boardMsg("Peace by more firepower").css({'color': 'red','margin-left' : '20px', 'margin-top' : '0px'});
 
           playerOneScore++;
+          console.log(playerOneScore);
+          scoreBoardOne.text('Clinton: ' + playerOneScore)
+                    .css({"color": "red",
+                          'font-size' : '30px',
+                          'font-weight' : 'bold',
+                          'display': 'block'});
+
         }
 
     }
@@ -110,9 +119,12 @@ if (turn%2 === 0)
       if(winner !== 0)
         {
           $('#gameField').css('display', 'none');
-          boardMsg("Feel the Burn!").css('color', 'red');
+          boardMsg("Feel the Burn!").css({'color': 'red','margin-left' : '20px','margin-top' : '0px'});
 
           playerTwoScore++;
+          console.log(playerTwoScore);
+          scoreBoardTwo.text('Bernie: ' + playerTwoScore);
+
 
         }
     }
@@ -125,7 +137,7 @@ if (turn%2 === 0)
       {
         console.log('Draw');
         $('#gameField').css('display', 'none');
-        boardMsg("No on moves into the white house!").css('color', 'red');
+        boardMsg("No on moves into the white house!").css({'color': 'red','margin' : '10%', 'margin-top' : '10%', 'display' : 'inline-block', 'width': '40%', 'text-align':'center'});
         winner = 1;
         turn=0;
       }

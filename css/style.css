@@ -9,6 +9,7 @@ body
   background-image: url(../images/WhiteHouse.jpg);
   background-size: cover;
   image-resolution: from-image;
+  bottom : 0;
   /*max-width: 100%;*/
 }
 
@@ -16,14 +17,8 @@ body
 {
   width: 98%;
   display: flex;
+  position: relative;
 }
-
-.buttons
-{
-  width: 20%;
-  display: inline-block;
-}
-
 button
 {
   padding: 0;
@@ -44,19 +39,45 @@ button
   box-sizing: border-box;
 
 }
-/*#scoreboard
+
+.buttons
 {
+  max-width: 150px;
+
   display: inline-block;
-  width: 5%;
-}*/
+  width: 20%;
+}
+
+.scoreBoard
+{
+  display: inline-block;;
+  position: absolute;
+  width: 25%;
+  right: 0;
+  top: 0;
+
+
+}
+ul
+{
+  padding: 0;
+  color: red;
+  font-size: 30px;
+  margin-left: 20px;
+  font-weight: bold;
+  display: block;
+
+}
 
 #gameField
 {
+  display: inline-block;
   width: 50%;
   height: 600px;
   margin-top: 0%;
-  /*margin-left: 25%;*/
-  display: inline-block;
+  margin-left: 5%;
+
+
 
 }
 
