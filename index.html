@@ -6,15 +6,15 @@
   <title>Tic Tac Toe</title>
 </head>
 <body>
-  <img src="" alt="">
+  <audio id="backgroundSound" src="./sound/Background.mp3" controls autoplay loop></audio>
   <div class="menu">
     <h1>Choose your Avatar</h1>
         <div class="avatars">
-            <img id="clinton"src="images/Clinton.jpg"name="Clinton"alt="Peace with more firepower!"/>
-            <img id="bernie"src="images/Bernie.jpg"name="Bernie"alt="Feel the burn!"/>
-            <img id="trump"src="images/trump.jpg"name="Trump"alt="Kick out the immigrants!"/>
-            <img id="cruz"src="images/cruz.jpg"name="Cruz"alt="WTF!"/>
-            <img id="santorum"src="images/santorum.jpg"name="Sanatorum"alt="We need more labor camps!"/>
+            <img id="clinton"src="images/Clinton.jpg"name="Hillary Clinton"alt="Peace with more firepower!"/>
+            <img id="bernie"src="images/Bernie.jpg"name="Bernie Sanders"alt="Feel the burn!"/>
+            <img id="trump"src="images/trump.jpg"name="Donald Trump"alt="Kick out the immigrants!"/>
+            <img id="abbott"src="images/abbott.jpg"name="Tony Abbott"alt="WTF!"/>
+            <img id="Hitler"src="images/hitler.jpg"name="Adolf Hitler"alt="We need more labor camps!"/>
             <img id="marley"src="images/Marley.jpg"name="Bob Marley"alt="I m jamming..."/>
             <img id="vader"src="images/vader.jpeg"name="Darth Vader"alt="Come to the dark side..."/>
           <div id="avatarOne">
@@ -27,6 +27,7 @@
   </div>
 <div class="game">
     <h1>Who got to rule the world?</h1>
+    <div id="turn"></div>
     <div class="gameArea">
           <div class="buttons">
               <button id="reload" type="button" name="reloadButton">Reload the bloody Page</button>
@@ -60,6 +61,5 @@
 
 <script   src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="js/TicTac.js"></script>
-
 </body>
 </html>

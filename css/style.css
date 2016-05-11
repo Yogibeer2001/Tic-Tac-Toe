@@ -8,21 +8,23 @@ body
   background-color: blue;
   background-image: url(../images/WhiteHouse.jpg);
   background-size: cover;
-  image-resolution: from-image;
-  bottom : 0;
-  /*max-width: 100%;*/
+  max-width: 100%;
 }
 .menu
 {
-  display: inline-block;
+  /*display: inline-block;*/
+  justify-content: flex-center;
+
 }
 .avatars img
 {
     height: 100px;
     width: 100px;
-    display: inline-block;;
+    /*display: inline-block;;*/
     margin : 0;
     padding: 0;
+    justify-content: flex-center;
+
 }
 
 .game
@@ -31,7 +33,7 @@ body
 }
 .gameArea
 {
-  width: 98%;
+  width: 99%;
   display: flex;
   position: relative;
 }
@@ -50,6 +52,8 @@ button
   background-image: url(../images/flag.gif);
   background-size: cover;
   image-resolution: from-image;
+  box-shadow: 9px 14px 8px 2px rgba(0,0,0,0.75);
+  border-radius: 126px 21px 200px 47px;
 
   display: block;
   box-sizing: border-box;
@@ -87,11 +91,10 @@ ul
 
 #gameField
 {
-  display: inline-block;
-  width: 50%;
-  height: 600px;
-  margin-top: 0%;
-  margin-left: 5%;
+  display: block;
+  margin: 5% 0 0 0;
+  width: 25%;
+  padding-left: 15%;
 
 
 
@@ -99,6 +102,7 @@ ul
 
 .row
 {
+
   display: flex;
   width: 300px;
   height: 100px;
@@ -111,6 +115,7 @@ ul
   border-style:solid;
   border-color: black;
   transition: all .2s ease-in-out;
+
 }
 .column img
 {
@@ -119,17 +124,27 @@ ul
   margin : 0;
   padding: 0;
 }
-.column:hover
+column:hover
 {
-  background-image: url(../images/flag.jpg);
-
+  transition: all .2s ease-in-out;
   background-position: center;
   background-size: cover;
   transform: scale(1.25);
 }
-
+#turn
+{
+  position: relative;
+  margin-left: 35%;
+  margin-bottom: 15px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-size: 30px;
+  color: red;
+}
 h1
 {
+  margin-top: 0;
   font-size: 50px;
   right: 0;
   font-weight: bold;

@@ -4,13 +4,8 @@
 var avatar = $('.avatars img');
 var avatarOne = $('.avatars #avatarOne');
 var avatarTwo = $('.avatars #avatarTwo');
-// var playerOne = '<img src="images/Clinton.jpg"/>';
-// var playerTwo = '<img src="images/Bernie.jpg"/>';
-// works fine with that
 var playerOne = '';
-var playerOneName = '';
 var playerTwo = '';
-var playerTwoName = '';
 var reloadButton = $('#reload');
 var startButton = $('#newGame');
 var scoreBoardOne = $('.scoreBoard>#playerOne');
@@ -26,7 +21,15 @@ var maxHeight = 100;
 var maxWidth = 100;
 var playerOneScore = 0;
 var playerTwoScore = 0;
-
+var clinton = new Audio("./Sound/clintonSound.mp3");
+var bernie = new Audio("./Sound/bernieSound.mp3");
+var trump = new Audio("./Sound/trumpSound.wav");
+var abbott = new Audio("./Sound/abbottSound.mp3");
+var hitler = new Audio("./Sound/hitlerSound.mp3");
+var marley = new Audio("./Sound/marleySound.mp3");
+var vader = new Audio("./Sound/vaderSound.mp3");
+var noWinner = new Audio("./sound/noWinner.mp3");
+var winSound = new Audio("./sound/win.mp3");
 
   avatar.on('click', function()
           {
@@ -34,6 +37,7 @@ var playerTwoScore = 0;
               {
                 playerOne = this;
                 avatarOne.append(playerOne).css('display', 'flex');
+                avatarSound(playerOne);
                 scoreBoardOne.text(playerOne.name + ' : ' + playerOneScore);
 
                 console.log(playerOne.name);
@@ -43,12 +47,14 @@ var playerTwoScore = 0;
             {
               playerTwo = this;
               avatarTwo.append(playerTwo).css('display', 'flex');
+              avatarSound(playerTwo);
               scoreBoardTwo.text(playerTwo.name + ' : ' + playerTwoScore);
               console.log(playerTwo.name);
               console.log(playerTwo.alt);
             }
           else
             {
+              setTurn();
               $('.menu').css('display', 'none');
               $('.game').css('display', 'block');
             }
@@ -62,10 +68,32 @@ startButton.on('click',function(event)
   console.log('clicked');
   start();
 });
+
 function boardMsg(x)
     {
       return $("#board").text(x);
     }
+function turnNote(x)
+{
+  return $('#turn').text(x);
+}
+// function selectPlayer1()
+//     {
+//       document.getElementById("candidate1").play();
+//     };
+// function selectPlayer2()
+//     {
+//       document.getElementById("candidate2").play();
+//     };
+// function winningSound()
+//     {
+//       document.getElementById("win").play();
+//     };
+// function noWinnerSound()
+//     {
+//       document.getElementById("noWinner").play();
+//     };
+//
 function start()
 {
             turn = "";
@@ -80,8 +108,21 @@ function start()
     $(".column").css('background-image', 'none');
         winner = 0;
         turn = 0;
-        $('#gameField').css('display', 'inline-block');
+        $('#gameField');
+        setTurn();
 }
+$(".column").mouseover(function()
+{
+  $(this).css({'background-opacity': '1' ,
+
+  'transform': 'scale(1.2)'})
+})
+$(".column").mouseout (function()
+{
+  $(this).css({'transform':'scale(1)', 'background-opacity':'0'})
+  });
+
+
 $('.column').on('click', function()
 {
   var row = $(this).parent().index();
@@ -123,6 +164,7 @@ $('.column').on('click', function()
           boardMsg(playerOne.alt).css({'color': 'red','margin-left' : '20px', 'margin-top' : '0px'});
 
           playerOneScore++;
+          winSound.play();
           scoreBoardOne.text(playerOne.name + ' : ' + playerOneScore)
                     .css({"color": "red",
                           'font-size' : '30px',
@@ -143,6 +185,8 @@ $('.column').on('click', function()
             boardMsg(playerTwo.alt).css({'color': 'red','margin-left' : '20px','margin-top' : '0px'});
 
             playerTwoScore++;
+            winSound.play();
+
             scoreBoardTwo.text(playerTwo.name + ' : ' + playerTwoScore);
           }
     }
@@ -154,48 +198,51 @@ $('.column').on('click', function()
       {
         $('#gameField').css('display', 'none');
         boardMsg("No one moves into the white house!").css({'color': 'red','margin' : '10%', 'margin-top' : '10%', 'display' : 'inline-block', 'width': '40%', 'text-align':'center'});
+        noWinnerSound();
         winner = 1;
         turn=0;
       }
 
 });
 
-// switch(playerOne)
-//     {
-//       case '<img id="clinton"src="images/Clinton.jpg"/>' :
-//                         message = winningMessage[0];
-//                         name1 = 'Clinton';
-//                         break;
-//       case '<img id="bernie"src="images/Bernie.jpg"/>' :
-//                         message = winningMessage[1];
-//                         name1 = 'Bernie';
-//                         break;
-//       case '<img id="trump"src="images/trump.jpg"/> ':
-//                         message = winningMessage[2];
-//                         name1 = 'Trump';
-//                         break;
-//       case '<img id="cruz"src="images/cruz.jpg"/>' :
-//                         message = winningMessage[3];
-//                         name1 = 'Cruz';
-//                         break;
-//       case '<img id="santorum"src="images/santorum.jpg"/>' :
-//                         message = winningMessage[4];
-//                         name1 = 'Santorum';
-//                         break;
-//       case '<img id="marley"src="images/Marley.jpg"/> ':
-//                         message = winningMessage[5];
-//                         name1 = 'Bob Marley';
-//                         break;
-//       case '<img id="vader"src="images/vader.jpeg"/>' :
-//                         message = winningMessage[6];
-//                         name1 = 'Darth Vader';
-//                         break;
-//       }
-// console.log(playerOne);
-// console.log(name1);
-// console.log(message);
-// }
 
+function avatarSound(player)
+{
+  switch (player.name)
+  {
+    case 'Hillary Clinton': clinton.play();
+    break;
+    case 'Bernie Sanders': bernie.play();
+    break;
+    case 'Donald Trump': trump.play();
+    break;
+    case 'Tony Abbott': abbott.play();
+    break;
+    case 'Adolf Hitler': hitler.play();
+    break;
+    case 'Bob Marley': marley.play();
+    break;
+    case 'Darth Vader': vader.play();
+    break;
+    // default: noWinner.play()
+  }
+}
+
+function setTurn()
+{
+    var randomNumber = Math.floor((Math.random() * 2) + 1);
+    winner = 0;
+    if(randomNumber == 1)
+    {
+      currentPlayer = playerOne.src;
+        turnNote(playerOne.name+"'s turn to start!");
+    }
+    else
+    {
+      currentPlayer = playerTwo.src;
+        turnNote(playerTwo.name +"'s turn to start!");
+    }
+}
 
 // });
 
