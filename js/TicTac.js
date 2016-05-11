@@ -8,7 +8,9 @@ var avatarTwo = $('.avatars #avatarTwo');
 // var playerTwo = '<img src="images/Bernie.jpg"/>';
 // works fine with that
 var playerOne = '';
+var playerOneName = '';
 var playerTwo = '';
+var playerTwoName = '';
 var reloadButton = $('#reload');
 var startButton = $('#newGame');
 var scoreBoardOne = $('.scoreBoard>#playerOne');
@@ -24,13 +26,6 @@ var maxHeight = 100;
 var maxWidth = 100;
 var playerOneScore = 0;
 var playerTwoScore = 0;
-var winningMessage =['Peace with more firepower!',
-                      'Feel the burn!',
-                      'Kick out the immigrants!',
-                      'WTF!',
-                      'We need more labor camps!',
-                      'I m jamming...',
-                      'Come to the dark side...'];
 
 
   avatar.on('click', function()
@@ -39,13 +34,18 @@ var winningMessage =['Peace with more firepower!',
               {
                 playerOne = this;
                 avatarOne.append(playerOne).css('display', 'flex');
-                console.log(playerOne);
+                scoreBoardOne.text(playerOne.name + ' : ' + playerOneScore);
+
+                console.log(playerOne.name);
+                console.log(playerOne.alt);
               }
           else if (playerTwo === '')
             {
               playerTwo = this;
               avatarTwo.append(playerTwo).css('display', 'flex');
-              console.log(playerTwo);
+              scoreBoardTwo.text(playerTwo.name + ' : ' + playerTwoScore);
+              console.log(playerTwo.name);
+              console.log(playerTwo.alt);
             }
           else
             {
@@ -71,16 +71,17 @@ function start()
             turn = "";
             grid =  [[0,0,0],[0,0,0],[0,0,0]];
             boardMsg("");
+
     $(".column").map(function()
       {
                 $(this).text("");
       })
                 .get();
+    $(".column").css('background-image', 'none');
         winner = 0;
         turn = 0;
         $('#gameField').css('display', 'inline-block');
 }
-
 $('.column').on('click', function()
 {
   var row = $(this).parent().index();
@@ -119,10 +120,10 @@ $('.column').on('click', function()
       if(winner !== 0)
         {
           $('#gameField').css('display', 'none');
-          boardMsg("Peace by more firepower").css({'color': 'red','margin-left' : '20px', 'margin-top' : '0px'});
+          boardMsg(playerOne.alt).css({'color': 'red','margin-left' : '20px', 'margin-top' : '0px'});
 
           playerOneScore++;
-          scoreBoardOne.text('Clinton: ' + playerOneScore)
+          scoreBoardOne.text(playerOne.name + ' : ' + playerOneScore)
                     .css({"color": "red",
                           'font-size' : '30px',
                           'font-weight' : 'bold',
@@ -139,10 +140,10 @@ $('.column').on('click', function()
         if(winner !== 0)
           {
             $('#gameField').css('display', 'none');
-            boardMsg("Feel the Burn!").css({'color': 'red','margin-left' : '20px','margin-top' : '0px'});
+            boardMsg(playerTwo.alt).css({'color': 'red','margin-left' : '20px','margin-top' : '0px'});
 
             playerTwoScore++;
-            scoreBoardTwo.text('Bernie: ' + playerTwoScore);
+            scoreBoardTwo.text(playerTwo.name + ' : ' + playerTwoScore);
           }
     }
   turn++;
@@ -159,7 +160,41 @@ $('.column').on('click', function()
 
 });
 
-
+// switch(playerOne)
+//     {
+//       case '<img id="clinton"src="images/Clinton.jpg"/>' :
+//                         message = winningMessage[0];
+//                         name1 = 'Clinton';
+//                         break;
+//       case '<img id="bernie"src="images/Bernie.jpg"/>' :
+//                         message = winningMessage[1];
+//                         name1 = 'Bernie';
+//                         break;
+//       case '<img id="trump"src="images/trump.jpg"/> ':
+//                         message = winningMessage[2];
+//                         name1 = 'Trump';
+//                         break;
+//       case '<img id="cruz"src="images/cruz.jpg"/>' :
+//                         message = winningMessage[3];
+//                         name1 = 'Cruz';
+//                         break;
+//       case '<img id="santorum"src="images/santorum.jpg"/>' :
+//                         message = winningMessage[4];
+//                         name1 = 'Santorum';
+//                         break;
+//       case '<img id="marley"src="images/Marley.jpg"/> ':
+//                         message = winningMessage[5];
+//                         name1 = 'Bob Marley';
+//                         break;
+//       case '<img id="vader"src="images/vader.jpeg"/>' :
+//                         message = winningMessage[6];
+//                         name1 = 'Darth Vader';
+//                         break;
+//       }
+// console.log(playerOne);
+// console.log(name1);
+// console.log(message);
+// }
 
 
 // });
