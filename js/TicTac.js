@@ -35,7 +35,7 @@ var hitler = new Audio("./Sound/hitlerSound.mp3");
 var hitlerIntro = new Audio("./Sound/hitler-intro.mp3");
 var marley = new Audio("./Sound/marleySound.mp3");
 var vader = new Audio("./Sound/vaderSound.mp3");
-var vader = new Audio("./Sound/vader-intro.mp3");
+var vaderIntro = new Audio("./Sound/vader-intro.mp3");
 var noWinner = new Audio("./sound/noWinner.mp3");
 var winSound = new Audio("./sound/win.mp3");
 var computerMode = false;
@@ -54,7 +54,7 @@ function avatarIntro(player) {
         break;
     case 'Bob Marley': marley.play();
         break;
-    case 'Darth Vader': vader.play();
+    case 'Darth Vader': vaderIntro.play();
         break;
     }
 }
