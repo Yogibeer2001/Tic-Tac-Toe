@@ -11,6 +11,8 @@ var playerOne = '';
 var playerTwo = '';
 var reloadButton = $('#reload');
 var startButton = $('#newGame');
+var singleButton = $('#singlePlayer');
+var multiButton = $('#multiPlayer');
 var scoreBoardOne = $('.scoreBoard>#playerOne');
 var scoreBoardTwo = $('.scoreBoard>#playerTwo');
 var currentPlayer;
@@ -33,7 +35,7 @@ var marley = new Audio("./Sound/marleySound.mp3");
 var vader = new Audio("./Sound/vaderSound.mp3");
 var noWinner = new Audio("./sound/noWinner.mp3");
 var winSound = new Audio("./sound/win.mp3");
-
+var computerMode = false;
 function avatarSound(player) {
   switch (player.name) {
     case 'Hillary Clinton': clinton.play();
@@ -88,6 +90,16 @@ function start() {
         $('#gameField').css({'display': 'inline-block'});
         setTurn();
 }
+function computerRandom () {
+  var cordinateX = (Math.floor((Math.random() * 3)+1));
+  var cordinateY = (Math.floor((Math.random() * 3)+1));
+    if(grid[cordinateX][cordinateY] == 0) {
+      grid[cordinateX][cordinateY] = 2;
+    } else {
+        computerRandom();
+  }
+}
+
 
 avatar.on('click', function () {
             if (playerOne === '') {
@@ -118,26 +130,18 @@ startButton.on('click', function (event) {
   console.log('clicked');
     start();
 });
+singleButton.on('click', function (event) {
+  console.log('not working yet');
+  computerMode = true;
+});
+multiButton.on('click', function (event) {
+  console.log('no stress go ahead');
+});
 
-
-// $(".column").mouseover(function()
-// {
-//   $(this).css({'background-opacity': '1' ,
-//
-//   'transform': 'scale(1.2)'})
-// })
-// $(".column").mouseout (function()
-// {
-//   $(this).css({'transform':'scale(1)', 'background-opacity':'0'})
-//   });
-
-
-$('.column').on('click', function()
-{
+$('.column').on('click', function() {
   var row = $(this).parent().index();
   var column = $(this).index();
-    function checkWinner(n,playerName)
-      {
+    function checkWinner(n,playerName) {
         if(
             (grid[0][0]==n && grid[0][1]==n && grid[0][2]==n) ||
             (grid[1][0]==n && grid[1][1]==n && grid[1][2]==n) ||
@@ -147,32 +151,34 @@ $('.column').on('click', function()
             (grid[0][2]==n && grid[1][2]==n && grid[2][2]==n) ||
             (grid[0][0]==n && grid[1][1]==n && grid[2][2]==n)||
             (grid[0][2]==n && grid[1][1]==n && grid[2][0]==n)
-            )
-        {
+            ) {
             winner = 1;
             turn=0;
             return true;
         }
         return false;
       }
-    if(grid[row][column] !==0)
-      {
+    if(grid[row][column] !==0) {
           alert("This position is taken. Please try other position.");
           return;
       }
-    // if (turn%2 === 0)
-    if (currentPlayer == playerOne.src)
-    {
-      // currentPlayer = playerOne.src;
+    if (currentPlayer == playerOne.src) {
       grid[row][column] = 1;
-
       win = checkWinner(1,playerOne);
       if(winner !== 0)
         {
           $('#gameField').css('display', 'none');
-          boardMsg(playerOne.alt).css({'color': 'red','margin-left' : '20px', 'margin-top' : '0px'});
+          $('#gameField').css('background-image', 'playerOne');
+          boardMsg(playerOne.alt)
+                  .css({'color': 'red',
+                        'display': 'block',
+                        'margin-left' : '15%',
+                        'margin-right' : '15%',
+                        'margin-top' : '5%',
+                      })
+                      .append(playerOne).css({'width': '200px', 'height': '200px'});
+          turnNote(playerOne.name + ' wins this round!');
           avatarSound(playerOne);
-
           playerOneScore++;
           winSound.play();
           scoreBoardOne.text(playerOne.name + ' : ' + playerOneScore)
@@ -186,13 +192,22 @@ $('.column').on('click', function()
     }
     else
     {
-
       grid[row][column] = 2;
       win = checkWinner(2,'Player 2');
         if(winner !== 0)
           {
             $('#gameField').css('display', 'none');
-            boardMsg(playerTwo.alt).css({'color': 'red','margin-left' : '20px','margin-top' : '0px'});
+            $('#gameField').css('background-image', 'playerTwo');
+
+            boardMsg(playerTwo.alt)
+                    .css({'color': 'red',
+                          'display': 'block',
+                          'margin-left' : '15%',
+                          'margin-right' : '15%',
+                          'margin-top' : '5%',
+                          })
+                    .append(playerTwo).css({'width': '200px', 'height': '200px'});
+            turnNote(playerTwo.name + ' wins this round!');
             avatarSound(playerTwo);
 
             playerTwoScore++;
@@ -208,17 +223,19 @@ $('.column').on('click', function()
       if(turn === 9)
       {
         $('#gameField').css('display', 'none');
-        boardMsg("No one moves into the white house!").css({'color': 'red','margin' : '10%', 'margin-top' : '10%', 'display' : 'inline-block', 'width': '40%', 'text-align':'center'});
+        boardMsg("No one moves into the white house!")
+          .css({'color': 'red',
+                'margin' : '10%',
+                'margin-top' : '10%',
+                'display' : 'inline-block',
+                'width': '40%',
+                'text-align':'center'});
         noWinnerSound();
         winner = 1;
         turn=0;
       }
 
 });
-
-
-
-
 
 // });
 
