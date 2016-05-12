@@ -3,10 +3,29 @@ body, html
   margin: 0;
   padding: 0;
 }
+.avatars
+{
+      position: absolute;
+      display: inline-block;
+      right: 20%;
+      text-align: center;
+      width: 60%;
+      height: 100px;
+}
 body {
  background: url(../images/WhiteHouse.jpg) no-repeat center center fixed;
  background-size: cover;
+ height: 95%;
+
 }
+canvas
+{
+position:absolute;
+	left:0;
+	top:0;
+	z-index:0;
+	border:0px solid #000;
+}s
 img
 {
     height: 100px;
@@ -52,7 +71,16 @@ button
   display: inline-block;
   width: 20%;
 }
-
+.playerMode
+{
+  max-width: 150px;
+  display: inline-block;
+  width: 20%;
+}
+.button:active
+{
+     background-position: -100px 0px;
+}
 .scoreBoard
 {
   display: inline-block;;
@@ -73,12 +101,12 @@ ul
 
 #gameField
 {
-  position:absolute;
-  display: block;
-  margin: 5% 0 0 0;
-  width: 25%;
-  padding-left: 15%;
-  padding-right: 5%;
+
+  position: relative;
+text-align: center;
+padding: 0;
+margin: 5px 7% 0 10%;
+font-size: 30px;
 }
 
 .row
@@ -95,21 +123,20 @@ ul
   border-style:solid;
   border-color: black;
   transition: all .2s ease-in-out;
-background-size:
 }
-/*.column img
+@keyframes vibe
 {
-  height: 94px;
-  width: 94px;
-  margin : 0;
-  padding: 0;
-}*/
+  0%   {transformX: (10px)}
+  25%  {transformX: (-20px)}
+  50%  {transformX: (10px)}
+  100% {transformX: (20px)}
+}
 .column:hover
 {
   transition: all .2s ease-in-out;
   background-position: center;
   background-size: cover;
-  transform: scale(1.25);
+  transform: scale(1.25) translate3d(-150, 150, 300);
 }
 #turn
 {
@@ -132,12 +159,14 @@ h1
 }
 h2
 {
+  position absolute;
   font-size: 50px;
-  display: block;
+  display: inline-block;
   text-align: center;
 }
 #board{
     font-size: 30px;
     font-family: sans-serif;
     margin-top: 20px;
+    margin-bottom: 50px;
 }
