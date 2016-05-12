@@ -6,28 +6,23 @@ body, html
 body {
  background: url(../images/WhiteHouse.jpg) no-repeat center center fixed;
  background-size: cover;
+ height: 95%;
 }
-img
-{
+canvas {
+position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 0;
+	border: 0 solid #000;
+}
+img {
     height: 100px;
     width: 100px;
     margin : 0;
     padding: 0;
     align-self: center;
 }
-
-.game
-{
-  display: none;
-}
-.gameArea
-{
-  width: 99%;
-  display: flex;
-  position: relative;
-}
-button
-{
+button {
   padding: 0;
   margin: 0;
   color: yellow;
@@ -40,79 +35,102 @@ button
   width: 150px;
   background-image: url(../images/flag.gif);
   background-size: cover;
-  image-resolution: from-image;
   box-shadow: 9px 14px 8px 2px rgba(0,0,0,0.75);
   border-radius: 126px 21px 200px 47px;
-  display: block;
-  box-sizing: border-box;
+  text-shadow: 2px 3px 0 rgba(235, 0, 231, 1);
 }
-.buttons
-{
+h1 {
+  margin-top: 0;
+  font-size: 50px;
+  right: 0;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 2px 3px 0 rgba(235, 0, 231, 1);
+}
+ul {
+  padding: 5px;
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 10px 20% 10px;
+  text-shadow: 2px 3px 0 rgba(0, 0, 255, 1);
+}
+
+h3 {
+  color: yellow;
+  font-size: 35px;
+  font-style: oblique;
+  text-shadow: 2px 3px 0 rgba(235, 0, 231, 1);
+}
+.players {
+  position: absolute;
+  font-size: 40px;
+  display: block;
+  text-align: left;
+}
+.avatars {
+      position: absolute;
+      display: inline-block;
+      right: 10%;
+      text-align: center;
+      width: 60%;
+}
+.game {
+  display: none;
+}
+.gameArea {
+  width: 99%;
+  display: flex;
+  position: relative;
+}
+.buttons {
+  max-width: 150px;
+  display: inline-block;
+  width: 20%;
+  text-shadow: 2px 3px 0 rgba(235, 0, 231, 1);
+}
+.playerMode {
   max-width: 150px;
   display: inline-block;
   width: 20%;
 }
-
-.scoreBoard
-{
-  display: inline-block;;
-  position: absolute;
+.button:active {
+     background-position: -100px 0;
+}
+.scoreBoard {
+  font-size: 25px;
   width: 25%;
   right: 0;
   top: 0;
 }
-ul
-{
-  padding: 0;
-  color: red;
-  font-size: 30px;
-  margin-left: 20px;
-  font-weight: bold;
-  display: block;
-}
-
-#gameField
-{
-  position:absolute;
-  display: block;
-  margin: 5% 0 0 0;
-  width: 25%;
-  padding-left: 15%;
-  padding-right: 5%;
-}
-
-.row
-{
+.row {
   display: flex;
   width: 300px;
   height: 100px;
 }
 
-.column
-{
+.column {
   width: 100px;
   box-sizing: border-box;
   border-style:solid;
   border-color: black;
   transition: all .2s ease-in-out;
-background-size:
 }
-/*.column img
-{
-  height: 94px;
-  width: 94px;
-  margin : 0;
-  padding: 0;
-}*/
+@keyframes vibe {
+  0%   {transformX: 10px}
+  25%  {transformX: -20px}
+  50%  {transformX: 10px}
+  100% {transformX: 20px}
+}
 .column:hover
 {
   transition: all .2s ease-in-out;
   background-position: center;
   background-size: cover;
-  transform: scale(1.25);
+  transform: scale(1.25) translate3d(-150, 150, 300);
 }
-#turn
-{
+#turn {
   position: relative;
   margin-left: 35%;
   margin-bottom: 15px;
@@ -120,24 +138,21 @@ background-size:
   padding: 0;
   margin: 0;
   font-size: 30px;
-  color: red;
+  color: blue;
 }
-h1
-{
-  margin-top: 0;
-  font-size: 50px;
-  right: 0;
-  font-weight: bold;
-  text-align: center;
-}
-h2
-{
-  font-size: 50px;
-  display: block;
-  text-align: center;
-}
-#board{
+
+#board {
     font-size: 30px;
     font-family: sans-serif;
     margin-top: 20px;
+    margin-bottom: 50px;
+    max-width: 350px;
+    max-height: 350px;
+}
+#gameField {
+  position: relative;
+  text-align: center;
+  padding: 0;
+  margin: 5px 2% 0 10%;
+  font-size: 30px;
 }
