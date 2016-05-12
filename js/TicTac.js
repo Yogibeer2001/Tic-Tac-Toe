@@ -29,7 +29,7 @@ var playerTwoScore = 0;
 var clinton = new Audio("./Sound/clintonSound.mp3");
 var bernie = new Audio("./Sound/bernieSound.mp3");
 var trump = new Audio("./Sound/trumpSound.wav");
-var trumpIntro = new Audio("./Sound/trump-intro.wav");
+var trumpIntro = new Audio("./Sound/trump-intro.mp3");
 var abbott = new Audio("./Sound/abbottSound.mp3");
 var hitler = new Audio("./Sound/hitlerSound.mp3");
 var hitlerIntro = new Audio("./Sound/hitler-intro.mp3");
@@ -112,15 +112,15 @@ function start() {
         $('#gameField').css({'display': 'inline-block'});
         setTurn();
 }
-function computerRandom () {
-  var cordinateX = (Math.floor((Math.random() * 3)+1));
-  var cordinateY = (Math.floor((Math.random() * 3)+1));
-    if(grid[cordinateX][cordinateY] == 0) {
-      grid[cordinateX][cordinateY] = 2;
-    } else {
-        computerRandom();
-  }
-}
+// function computerRandom () {
+//   var cordinateX = (Math.floor((Math.random() * 3)+1));
+//   var cordinateY = (Math.floor((Math.random() * 3)+1));
+//     if(grid[cordinateX][cordinateY] == 0) {
+//       grid[cordinateX][cordinateY] = 2;
+//     } else {
+//         computerRandom();
+//   }
+// }
 
 
 avatar.on('click', function () {
@@ -205,7 +205,11 @@ $('.column').on('click', function() {
           $(playerOne)
               .css({'width': '350px',
                     'height': '350px'});
-          turnNote(playerOne.name + ' wins this round!');
+          turnNote(playerOne.name + ' wins this round!')
+              .animate({width: [ "toggle", "swing" ],
+    height: [ "toggle", "swing" ],
+    opacity: "toggle"
+  }, 5000, "linear");
           avatarSound(playerOne);
           playerOneScore++;
           winSound.play();
@@ -242,7 +246,11 @@ $('.column').on('click', function() {
               .css({'width': '400px',
                     'height': '400px'});
 
-            turnNote(playerTwo.name + ' wins this round!');
+            turnNote(playerTwo.name + ' wins this round!')
+            .animate({width: [ "toggle", "swing" ],
+  height: [ "toggle", "swing" ],
+  opacity: "toggle"
+}, 5000, "linear");
             avatarSound(playerTwo);
 
             playerTwoScore++;
@@ -265,7 +273,11 @@ $('.column').on('click', function() {
                 'display' : 'inline-block',
                 'width': '40%',
                 'text-align':'center'});
-        noWinnerSound();
+          $('.board').animate({width: [ "toggle", "swing" ],
+      height: [ "toggle", "swing" ],
+      opacity: "toggle"
+      }, 5000, "linear");
+        noWinner.play();
         winner = 1;
         turn=0;
       }
