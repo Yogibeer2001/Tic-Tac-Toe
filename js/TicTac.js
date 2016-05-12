@@ -29,13 +29,35 @@ var playerTwoScore = 0;
 var clinton = new Audio("./Sound/clintonSound.mp3");
 var bernie = new Audio("./Sound/bernieSound.mp3");
 var trump = new Audio("./Sound/trumpSound.wav");
+var trumpIntro = new Audio("./Sound/trump-intro.wav");
 var abbott = new Audio("./Sound/abbottSound.mp3");
 var hitler = new Audio("./Sound/hitlerSound.mp3");
+var hitlerIntro = new Audio("./Sound/hitler-intro.mp3");
 var marley = new Audio("./Sound/marleySound.mp3");
 var vader = new Audio("./Sound/vaderSound.mp3");
+var vader = new Audio("./Sound/vader-intro.mp3");
 var noWinner = new Audio("./sound/noWinner.mp3");
 var winSound = new Audio("./sound/win.mp3");
 var computerMode = false;
+
+function avatarIntro(player) {
+  switch (player.name) {
+    case 'Hillary Clinton': clinton.play();
+        break;
+    case 'Bernie Sanders': bernie.play();
+        break;
+    case 'Donald Trump': trumpIntro.play();
+        break;
+    case 'Tony Abbott': abbott.play();
+        break;
+    case 'Adolf Hitler': hitlerIntro.play();
+        break;
+    case 'Bob Marley': marley.play();
+        break;
+    case 'Darth Vader': vader.play();
+        break;
+    }
+}
 function avatarSound(player) {
   switch (player.name) {
     case 'Hillary Clinton': clinton.play();
@@ -105,7 +127,7 @@ avatar.on('click', function () {
             if (playerOne === '') {
         playerOne = this;
         avatarOne.append(playerOne).css('display', 'flex');
-        avatarSound(playerOne);
+        avatarIntro(playerOne);
         scoreBoardOne.text(playerOne.name + ' : ' + playerOneScore);
         console.log(playerOne.name);
         console.log(playerOne.alt);
@@ -113,7 +135,7 @@ avatar.on('click', function () {
           else if (playerTwo === '') {
               playerTwo = this;
               avatarTwo.append(playerTwo).css('display', 'flex');
-              avatarSound(playerTwo);
+              avatarIntro(playerTwo);
               scoreBoardTwo.text(playerTwo.name + ' : ' + playerTwoScore);
               console.log(playerTwo.name);
               console.log(playerTwo.alt);
@@ -174,9 +196,15 @@ $('.column').on('click', function() {
                         'display': 'block',
                         'margin-left' : '15%',
                         'margin-right' : '15%',
-                        'margin-top' : '5%',
+                        'margin-top' : '0%',
+                        'width': '300px',
+                        'height': '300px',
+                        'font-size': '40px'
                       })
-                      .append(playerOne).css({'width': '200px', 'height': '200px'});
+                      .append(playerOne);
+          $(playerOne)
+              .css({'width': '350px',
+                    'height': '350px'});
           turnNote(playerOne.name + ' wins this round!');
           avatarSound(playerOne);
           playerOneScore++;
@@ -204,9 +232,16 @@ $('.column').on('click', function() {
                           'display': 'block',
                           'margin-left' : '15%',
                           'margin-right' : '15%',
-                          'margin-top' : '5%',
+                          'margin-top' : '0%',
+                          'width': '350px',
+                          'height': '350px',
+                          'font-size': '40px'
                           })
-                    .append(playerTwo).css({'width': '200px', 'height': '200px'});
+                    .append(playerTwo);
+          $(playerTwo)
+              .css({'width': '400px',
+                    'height': '400px'});
+
             turnNote(playerTwo.name + ' wins this round!');
             avatarSound(playerTwo);
 

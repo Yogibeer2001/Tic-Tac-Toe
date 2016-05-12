@@ -3,21 +3,9 @@ body, html
   margin: 0;
   padding: 0;
 }
-body
-{
-  /*background-color: blue;*/
-  background-image: url(../images/WhiteHouse.jpg);
-  background-size: cover;
-  min-width: 100%;
-  min-height: 100%;
-  background-repeat: no-repeat;
-
-}
-.menu
-{
-  /*display: inline-block;*/
-  /*justify-content: flex-center;*/
-
+body {
+ background: url(../images/WhiteHouse.jpg) no-repeat center center fixed;
+ background-size: cover;
 }
 img
 {
@@ -26,7 +14,6 @@ img
     margin : 0;
     padding: 0;
     align-self: center;
-
 }
 
 .game
@@ -59,7 +46,6 @@ button
   display: block;
   box-sizing: border-box;
 }
-
 .buttons
 {
   max-width: 150px;
