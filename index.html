@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="css/style.css">
+  <script   src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script type="text/javascript" src="js/TicTac.js"></script>
+
   <title>Tic Tac Toe</title>
 </head>
 <body>
-  <audio id="backgroundSound" src="./Sound/Background.mp3" controls autoplay loop></audio>
+  <audio id="backgroundSound" src="./Sound/Background.mp3" controls autoplay loop volume ='0'></audio>
   <div class="menu">
     <h1>Choose your Avatar</h1>
 <div class="playerMode">
@@ -21,15 +24,19 @@
             <img id="Hitler"src="images/hitler.jpg"name="Adolf Hitler"alt="We need more labor camps!"/>
             <img id="marley"src="images/Marley.jpg"name="Bob Marley"alt="I m jamming..."/>
             <img id="vader"src="images/vader.jpeg"name="Darth Vader"alt="Come to the dark side..."/>
-          <div id="avatarOne">
-            <h2 >Player One :</h2>
+
+            <div class="Player">
+                <div id="avatarOne">
+                  <h3 >Player One :</h3>
+                </div>
+                <div id="avatarTwo">
+                  <h3>Player Two :</h3>
+                </div>
+            </div>
           </div>
-          <div id="avatarTwo">
-            <h2>Player Two :</h2>
-          </div>
-        </div>
   </div>
 <div class="game">
+  <div class="party"></div>
     <h1>Who got to rule the world?</h1>
     <div id="turn"></div>
     <div class="gameArea">
@@ -54,16 +61,14 @@
                   <div class="column"></div>
                   <div class="column"></div>
                 </div>
+                <h1 id="board"></h1>
           </div>
       <div class="scoreBoard">
             <ul id='playerOne'> : 0</ul>
             <ul id='playerTwo'> : 0</ul>
       </div>
-          <h1 id="board"></h1>
     </div>
 </div>
 
-<script   src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-<script type="text/javascript" src="js/TicTac.js"></script>
 </body>
 </html>

@@ -1,12 +1,12 @@
-// $(function(){
+$(function(){
 
 /*jslint browser: true*/
 /*jslint node: true */
 /*global $, jQuery, alert, Audio, window*/
 
 var avatar = $('.avatars img');
-var avatarOne = $('.avatars #avatarOne');
-var avatarTwo = $('.avatars #avatarTwo');
+var avatarOne = $('.avatars #avatarOne h3');
+var avatarTwo = $('.avatars #avatarTwo h3');
 var playerOne = '';
 var playerTwo = '';
 var reloadButton = $('#reload');
@@ -27,28 +27,34 @@ var maxWidth = 100;
 var playerOneScore = 0;
 var playerTwoScore = 0;
 var clinton = new Audio("./Sound/clintonSound.mp3");
+var clintonIntro = new Audio("./Sound/clinton-intro.mp3");
 var bernie = new Audio("./Sound/bernieSound.mp3");
+var bernieIntro = new Audio("./Sound/bernie-intro.mp3");
 var trump = new Audio("./Sound/trumpSound.wav");
 var trumpIntro = new Audio("./Sound/trump-intro.mp3");
 var abbott = new Audio("./Sound/abbottSound.mp3");
+var abbottIntro = new Audio("./Sound/abbott-intro.mp3");
 var hitler = new Audio("./Sound/hitlerSound.mp3");
 var hitlerIntro = new Audio("./Sound/hitler-intro.mp3");
 var marley = new Audio("./Sound/marleySound.mp3");
+var marleyIntro = new Audio("./Sound/marley-intro.mp3");
 var vader = new Audio("./Sound/vaderSound.mp3");
 var vaderIntro = new Audio("./Sound/vader-intro.mp3");
 var noWinner = new Audio("./Sound/noWinner.mp3");
 var winSound = new Audio("./Sound/win.mp3");
+var cheering = new Audio("./Sound/cheering.mp3");
 var computerMode = false;
+var votes;
 
 function avatarIntro(player) {
   switch (player.name) {
-    case 'Hillary Clinton': clinton.play();
+    case 'Hillary Clinton': clintonIntro.play();
         break;
     case 'Bernie Sanders': bernie.play();
         break;
     case 'Donald Trump': trumpIntro.play();
         break;
-    case 'Tony Abbott': abbott.play();
+    case 'Tony Abbott': abbottIntro.play();
         break;
     case 'Adolf Hitler': hitlerIntro.play();
         break;
@@ -76,78 +82,70 @@ function avatarSound(player) {
         break;
     }
 }
+function turnNote(x) {
+  return $('#turn').text(x).css('text-shadow', '2px 3px 0px rgba(0, 0, 255, 1)');
+}
 function setTurn() {
     var randomNumber = Math.floor((Math.random() * 2) + 1);
     winner = 0;
-    if(randomNumber == 1)
-    {
-      currentPlayer = playerOne.src;
-        turnNote(playerOne.name+"'s turn to start!").css('display', 'center');
-    }
-    else
-    {
-      currentPlayer = playerTwo.src;
-        turnNote(playerTwo.name +"'s turn to start!").css('display', 'center');
+    if (randomNumber === 1) {
+        currentPlayer = playerOne.src;
+        turnNote(playerOne.name + "'s turn to start!").css('display', 'center');
+    } else {
+        currentPlayer = playerTwo.src;
+        turnNote(playerTwo.name + "'s turn to start!").css('display', 'center');
     }
     return currentPlayer;
 }
 function boardMsg(x) {
-      return $("#board").text(x);
-    }
-function turnNote(x) {
-  return $('#turn').text(x);
+    var board = $("#board").text(x).css({'font-size': '30', 'margin': '15px'});
+    board.css({'margin': '-310px 0 0 -10%', 'text-shadow': '2px 3px 0px rgba(235, 0, 231, 1)'});
+    return board;
 }
 function start() {
-            turn = "";
-            grid =  [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-            boardMsg("");
+    turn = "";
+    grid =  [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    boardMsg("").css('margin', '20px 0 0 50px');
 
-    $(".column").map(function() {
-            $(this).text("");
-        })
+    $(".column").map(function () {
+        $(this).text("");
+    })
                 .get();
-        $(".column").css('background-image', 'none');
-        winner = 0;
-        turn = 0;
-        $('#gameField').css({'display': 'inline-block'});
-        setTurn();
+    $(".column").css('background-image', 'none');
+    winner = 0;
+    turn = 0;
+    $('#gameField').css({'display': 'inline-block'});
+    setTurn();
 }
-
-function confettiShoot()
-{
+function confettiShoot() {
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
     particle = [];
-    particleCount = 0,
-      gravity = 0.1,
-      colors = [
+    particleCount = 0;
+    gravity = 0.1;
+    colors = [
         '#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5',
         '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50',
         '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800',
         '#FF5722', '#795548'
-      ];
+    ];
     for (var i = 0; i < 500; i++) {
-
       particle.push({
         x: width / 2,
         y: height / 2,
         boxW: randomRange(5, 20),
         boxH: randomRange(5, 20),
         size: randomRange(2, 8),
-
         spikeran: randomRange(3, 5),
-
         velX: randomRange(-8, 8),
         velY: randomRange(-50, -10),
-
         angle: convertToRadians(randomRange(0, 360)),
         color: colors[Math.floor(Math.random() * colors.length)],
         anglespin: randomRange(-0.2, 0.2),
 
         draw: function() {
-
           context.save();
           context.translate(this.x, this.y);
           context.rotate(this.angle);
@@ -275,21 +273,30 @@ function confettiShoot()
 
     }
 }
+function setVolume()
+    {
+        mySound=document.getElementById("backgroundSound");
+        mySound.volume=0.1;
+    }
+    window.onload=setVolume;
+function votes() {
+  return Math.ceil((Math.random()*15366)+14);
+}
 
 avatar.on('click', function () {
-            if (playerOne === '') {
+      if (playerOne === '') {
         playerOne = this;
         avatarOne.append(playerOne).css('display', 'inline');
         avatarIntro(playerOne);
-        scoreBoardOne.text(playerOne.name + ' : ' + playerOneScore);
+        scoreBoardOne.text(playerOne.name + ' : ' + playerOneScore + ' votes').css('text-shadow', '2px 3px 0px rgba(235, 0, 231, 1)');
         console.log(playerOne.name);
         console.log(playerOne.alt);
     }
           else if (playerTwo === '') {
               playerTwo = this;
-              avatarTwo.append(playerTwo)/*.css('display', 'inline-flex')*/;
+              avatarTwo.append(playerTwo);
               avatarIntro(playerTwo);
-              scoreBoardTwo.text(playerTwo.name + ' : ' + playerTwoScore);
+              scoreBoardTwo.text(playerTwo.name + ' : ' + playerTwoScore + ' votes').css('text-shadow', '2px 3px 0px rgba(235, 0, 231, 1)');
     } else {
         setTurn();
         $('.menu').css('display', 'none');
@@ -304,11 +311,19 @@ startButton.on('click', function (event) {
     start();
 });
 singleButton.on('click', function (event) {
-  console.log('not working yet');
+  alert('Under Construction');
   computerMode = true;
 });
 multiButton.on('click', function (event) {
-  console.log('no stress go ahead');
+  if (playerOne === '' || playerTwo === '') {
+    alert('No Players selected. Please select Players.')
+  }
+else {
+  cheering.play();
+  setTurn();
+  $('.menu').css('display', 'none');
+  $('.game').css('display', 'block');
+  }
 });
 
 $('.column').on('click', function() {
@@ -337,42 +352,31 @@ $('.column').on('click', function() {
       }
     if (currentPlayer == playerOne.src) {
       grid[row][column] = 1;
+
       win = checkWinner(1,playerOne);
       if(winner !== 0)
         {
-          $('#gameField').css('display', 'none');
+          $('#gameField').css('background', 'none');
           $('#gameField').css('background-image', 'playerOne');
           boardMsg(playerOne.alt)
-          .css({'color': 'red',
-                'display': 'block',
-                'margin-left' : '15%',
-                'margin-right' : '15%',
-                'margin-top' : '0%',
-                'max-width': '350px',
-                'maxheight': '350px',
-                'font-size': '40px'
-                })
-          .append(playerOne);
-          $(playerOne)
-          .css({'width': '350px',
-                'height': '350px'});
-          turnNote(playerOne.name + ' wins this round!')
+          .css('text-shadow', '2px 3px 0px rgba(235, 0, 231, 1)').prepend(playerOne);
+          $(playerOne).css({'width': '350px',
+                'height': '350px',
+                'box-shadow': '12px 16px 2px 2px rgba(0,0,0,0.85)'
+              });
+          turnNote(playerOne.name + ' wins this round!').css('text-shadow', '2px 3px 0px rgba(235, 0, 231, 1)');
   //             .animate({opacity: 0.65,
   //                       top: "+=50",
   //                       left: '-=50px',
   //                       width: "toggle"
   // }, 3000);
-  $('#board').append('<canvas id="canvas"></canvas>').css('z-index', '-1');
+  $('.party').append('<canvas id="canvas"></canvas>').css('z-index', '-2');
   confettiShoot();
 
           avatarSound(playerOne);
-          playerOneScore++;
+          playerOneScore = playerOneScore + votes();
           winSound.play();
-          scoreBoardOne.text(playerOne.name + ' : ' + playerOneScore)
-                    .css({"color": "red",
-                          'font-size' : '30px',
-                          'font-weight' : 'bold',
-                          'display': 'block'})
+          scoreBoardOne.text(playerOne.name + ' : ' + playerOneScore + ' votes').css('text-shadow', '2px 3px 0px rgba(235, 0, 231, 1)');
         }
         $(this).css('background-image', 'url(' + currentPlayer + ')');
         currentPlayer = playerTwo.src;
@@ -383,24 +387,15 @@ $('.column').on('click', function() {
       win = checkWinner(2,'Player 2');
         if(winner !== 0)
           {
-            $('#gameField').css('display', 'none');
+            $('#gameField').css('background', 'none');
             $('#gameField').css('background-image', 'playerTwo');
 
-            boardMsg(playerTwo.alt)
-              .css({'color': 'red',
-                    'display': 'block',
-                    'margin-left' : '15%',
-                    'margin-right' : '15%',
-                    'margin-top' : '0%',
-                    'max-width': '350px',
-                    'maxheight': '350px',
-                    'font-size': '40px'
-                          })
-              .append(playerTwo);
-          $(playerTwo)
-              .css({'width': '300px',
-                    'height': '300px'});
-$('#board').append('<canvas id="canvas"></canvas>').css('z-index', '-1');
+            boardMsg(playerTwo.alt).css('text-shadow', '2px 3px 0px rgba(00, 0, 255, 1)').prepend(playerTwo);
+          $(playerTwo).css({'width': '300px',
+                    'height': '300px',
+                    'box-shadow': '12px 16px 2px 2px rgba(0,0,0,0.85)'
+                  });
+$('.party').append('<canvas id="canvas"></canvas>').css('z-index', '-2');
 confettiShoot();
             turnNote(playerTwo.name + ' wins this round!')
 //             .animate({opacity: 0.65,
@@ -409,17 +404,14 @@ confettiShoot();
 //                       width: "toggle"
 // }, 3000);
             avatarSound(playerTwo);
-
-            playerTwoScore++;
+            playerTwoScore = playerTwoScore+votes();
             winSound.play();
-
-            scoreBoardTwo.text(playerTwo.name + ' : ' + playerTwoScore);
+            scoreBoardTwo.text(playerTwo.name + ' : ' + playerTwoScore + ' votes').css('text-shadow', '2px 3px 0px rgba(0, 0, 255, 1)');
           }
           $(this).css('background-image', 'url(' + currentPlayer + ')');
           currentPlayer = playerOne.src;
     }
   turn++;
-
       if(turn === 9)
       {
         $('#gameField').css('display', 'none');
@@ -429,7 +421,8 @@ confettiShoot();
                 'margin-top' : '10%',
                 'display' : 'inline-block',
                 'width': '40%',
-                'text-align':'center'})
+                'text-align':'center',
+                'text-shadow': '2px 3px 0px rgba(0, 0, 231, 1)'});
     //             .animate({opacity: 0.85,
     //                       top: "-=50",
     //                       left: '+=50px',
@@ -439,10 +432,9 @@ confettiShoot();
         winner = 1;
         turn=0;
       }
-
 });
 
-// });
+});
 
 // * Use timers to display "waiting..." messages while users are waiting to be matched
 // * Allow game customizable options, time limits, board size, game rounds, name & profiles etc
