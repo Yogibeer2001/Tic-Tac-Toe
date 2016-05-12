@@ -36,8 +36,8 @@ var hitlerIntro = new Audio("./Sound/hitler-intro.mp3");
 var marley = new Audio("./Sound/marleySound.mp3");
 var vader = new Audio("./Sound/vaderSound.mp3");
 var vaderIntro = new Audio("./Sound/vader-intro.mp3");
-var noWinner = new Audio("./sound/noWinner.mp3");
-var winSound = new Audio("./sound/win.mp3");
+var noWinner = new Audio("./Sound/noWinner.mp3");
+var winSound = new Audio("./Sound/win.mp3");
 var computerMode = false;
 
 function avatarIntro(player) {
